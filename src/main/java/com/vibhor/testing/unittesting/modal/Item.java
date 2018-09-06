@@ -16,6 +16,8 @@ public class Item {
 	@Transient
 	private int value;
 	
+	protected Item() {}
+	
 	public Item(int i, String string, int j, int k) {
 		this.id = i;
 		this.name = string;

@@ -2,6 +2,9 @@ package com.vibhor.testing.unittesting;
 
 import static org.junit.Assert.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import java.util.Arrays;
+
 import static org.mockito.Mockito.when;
 
 import org.junit.Test;
@@ -57,6 +60,26 @@ public class ItemControllerTest {
 				.perform(request)
 				.andExpect(status().isOk())
 				.andExpect(content().json("{\"id\": 2,\"price\":2,\"name\":\"Bat\"}"))
+				.andReturn();
+		
+		//verify /hello-world
+		//assertEquals("Hello World", result.getResponse().getContentAsString());
+	}
+	
+	@Test
+	public void retrieveAllItems_basic() throws Exception{
+		// call /hello-world
+		
+		when(businessService.retrieveAllItems()).thenReturn(
+				Arrays.asList(new Item(2, "Bat", 2, 300),
+						new Item(3, "Bat", 3, 300)));
+		RequestBuilder request = MockMvcRequestBuilders
+				.get("/all-items-from-database")
+				.accept(MediaType.APPLICATION_JSON); 
+		MvcResult result = mockMvc
+				.perform(request)
+				.andExpect(status().isOk())
+				.andExpect(content().json("[{\"id\": 2,\"price\":2,\"name\":\"Bat\"}, {id: 3,price:3,name:Bat}]"))
 				.andReturn();
 		
 		//verify /hello-world
