@@ -2,6 +2,9 @@ package com.vibhor.testing.unittesting.business;
 
 import com.vibhor.testing.unittesting.data.DataService;
 
+import java.util.Arrays;
+import java.util.OptionalInt;
+
 public class BusinessImpl {
 	
 	private DataService dataService;
@@ -11,7 +14,6 @@ public class BusinessImpl {
 	}
 
 	public int calculateSum(int[] data) {
-		
 		int sum = 0;
 		
 		for(int value: data) {
@@ -19,6 +21,11 @@ public class BusinessImpl {
 		}
 		
 		return sum;
+	}
+
+	public int calculateSum_functional(int[] data) {
+		//1,2,3,4 => 1+2+3+4
+		return Arrays.stream(data).reduce(Integer::sum).orElse(0);
 	}
 	
 	public int calculateSumUsingDataService() {

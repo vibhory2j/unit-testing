@@ -12,5 +12,4 @@ public class JsonAssertTest {
 		String expected = "";
 		JSONAssert.assertEquals(expected, actual, true);
 	}
-
 }
